@@ -1,10 +1,7 @@
 package rest;
 
-import entities.User;
 import entities.dto.UserDTO;
-import java.util.List;
 import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
