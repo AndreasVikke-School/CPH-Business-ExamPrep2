@@ -23,24 +23,30 @@ export default function Jokes({ version, count }) {
   return (
     <div className="container">
       <h3>Fetched data</h3>
-      <table className="table">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">Category</th>
-            <th scope="col">Joke</th>
-          </tr>
-        </thead>
-        <tbody>
-          {jokes.map((joke, index)=> (
-            <tr key={index}>
-              <td>{joke.category}</td>
-              <td>{joke.joke}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <JokesTable jokes={jokes} />
       <Filters count={count} categoriesData={categories} fetchJokes={fetchJokes} />
     </div>
+  )
+}
+
+function JokesTable({ jokes }) {
+  return (
+    <table className="table">
+      <thead className="thead-dark">
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Joke</th>
+        </tr>
+      </thead>
+      <tbody>
+        {jokes.map((joke, index)=> (
+          <tr key={index}>
+            <td>{joke.category}</td>
+            <td>{joke.joke}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   )
 }
 
@@ -49,7 +55,7 @@ function Filters({ count, categoriesData, fetchJokes }) {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    fetchJokes(Object.keys(categories).map(function(k){return categories[k] !== "" ? categories[k] : null}).join(","));
+    fetchJokes(Object.keys(categories).map(k => categories[k] !== "none" ? categories[k] : null).join(","));
   }
 
   const onChange = (evt) => {
@@ -73,8 +79,8 @@ function SelectFilters({ count, categoriesData }) {
 
   for(let i = 1; i <= count; i++) {
     result.push(
-      <select className={"custom-select col-sm-" + 12/count} id={"category" + i}>
-        <option value="">Select...</option>
+      <select key={i} className={"custom-select col-sm-" + 12/count} id={"category" + i}>
+        <option value="none">Select...</option>
         {categoriesData.map((category) => (
           <option key={category.id}>{category.name}</option>
         ))}

@@ -1,4 +1,5 @@
-const URL = "http://localhost:8080/ExamPrep2";
+//const URL = "http://localhost:8080/ExamPrep2"; // Local
+const URL = "https://andreasvikke.dk/ExamPrep2" //Deploy
 
 function handleHttpErrors(res) {
     if (!res.ok) {
