@@ -81,7 +81,7 @@ public class JokesResource {
         String[] catStrings = categoires.split(",");
         
         if(catStrings.length > 12)
-            throw new WebApplicationException("More than 4 categories supplied (Max. 4)");
+            throw new WebApplicationException("More than 12 categories supplied (Max. 12)");
         
         try {
             List<Category> cats = new ArrayList();
@@ -90,18 +90,6 @@ public class JokesResource {
             
             requestFacade.createRequest(cats);
             return jokesFacade.fetch(url, cats);
-        } catch(NoResultException ex) {
-            throw new WebApplicationException("Categories not allowed");
-        }
-    }
-
-    @GET
-    @Path("categoryCount/{category}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin"})
-    public long getRequestCountByCategory(@PathParam("category") long category) {
-        try {
-            return requestFacade.getCountOfRequestsInCategory(category);
         } catch(NoResultException ex) {
             throw new WebApplicationException("Categories not allowed");
         }

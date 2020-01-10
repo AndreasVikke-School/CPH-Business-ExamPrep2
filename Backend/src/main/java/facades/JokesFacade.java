@@ -15,14 +15,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
 import org.json.JSONObject;
 
 /**
  *
- * @author emilt
+ * @author Andreas Vikke
  */
 public class JokesFacade {
     

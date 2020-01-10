@@ -2,11 +2,13 @@ package facades;
 
 import entities.Category;
 import entities.Request;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import utils.EMF_Creator;
 
 /**
  *
@@ -39,7 +41,10 @@ public class RequestFacade {
     
     
     public List<Category> getAllCategories() {
-        return getEntityManager().createQuery("SELECT c FROM Category c").getResultList();
+        List<Category> categories = getEntityManager().createQuery("SELECT c FROM Category c").getResultList();
+        for(Category cat : categories)
+            cat.setRequests(null);
+        return categories;
     }
     
     public Category getSingleCategory(String name) throws NoResultException {
@@ -48,14 +53,19 @@ public class RequestFacade {
                 .getSingleResult();
     }
     
-    public List<Request> getAllRequests() {
-        return getEntityManager().createQuery("SELECT r FROM Request r").getResultList();
+    public long getRequestCountByCategory(String name) {
+        List<Category> cats = new ArrayList();
+        cats.add(getSingleCategory(name));
+        
+        return getEntityManager().createQuery("SELECT r FROM Request r WHERE r.categories IN :category")
+                .setParameter("category", cats)
+                .getResultList().size();
+        
+        
     }
     
-    public long getCountOfRequestsInCategory(long id) {
-        return getEntityManager().createQuery("SELECT COUNT(r) FROM Request r WHERE r.categories IN :id", Long.class)
-                .setParameter("id", id)
-                .getSingleResult();
+    public List<Request> getAllRequests() {
+        return getEntityManager().createQuery("SELECT r FROM Request r").getResultList();
     }
     
     public void createRequest(List<Category> categoires) {

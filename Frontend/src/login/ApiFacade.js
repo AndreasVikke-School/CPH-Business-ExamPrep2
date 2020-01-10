@@ -1,4 +1,4 @@
-const URL = "https://andreasvikke.dk/CA3";
+const URL = "http://localhost:8080/ExamPrep2";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -52,15 +52,29 @@ function ApiFacade() {
         return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
     }
 
-    const fetchData = () => {
-        return fetch(URL + "/api/swapi/demo", makeOptions("GET")).then(handleHttpErrors);
+    const fetchJokeByCategory = (categories) => {
+        return fetch(URL + "/api/jokes/jokeByCategory/" + categories, makeOptions("GET")).then(handleHttpErrors);
+    }
+    const fetchJokeByCategoryV2 = (categories) => {
+        return fetch(URL + "/api/jokes/jokeByCategoryV2/" + categories, makeOptions("GET", true)).then(handleHttpErrors);
+    }
+
+    const fetchAllCategories = () => {
+        return fetch(URL + "/api/category/all", makeOptions("GET")).then(handleHttpErrors);
+    }
+
+    const fetchRequestCountByCategory = (category) => {
+        return fetch(URL + "/api/category/categoryCount/" + category, makeOptions("GET", true)).then(handleHttpErrors);
     }
 
     return {
         login,
         logout,
         fetchUser,
-        fetchData
+        fetchJokeByCategory,
+        fetchJokeByCategoryV2,
+        fetchAllCategories,
+        fetchRequestCountByCategory
     }
 
 }

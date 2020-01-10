@@ -1,14 +1,7 @@
 const URLs = {
     "Home": "/",
     "Login": "/login",
-    "Products": "/products",
-    "ProductId": "/poroduct/:id",
-    "Data": "/data",
-    "Contact": "/contact",
-    "About": "/about",
-    "FAQ": "/faq",
-    "Basket": "/cart",
-    "Checkout": "/checkout",
+    "JokesV1": "/JokesV1",
     "NoMatch": "*"
 }
 

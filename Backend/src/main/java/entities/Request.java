@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +25,8 @@ public class Request implements Serializable {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
-    @OneToMany
+    
+    @ManyToMany
     private List<Category> categories;
 
     public Request() {

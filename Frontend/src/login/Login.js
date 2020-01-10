@@ -13,9 +13,9 @@ export default function Login(props) {
     }
 
     return (
-        <form onSubmit={onSubmit} onChange={onChange}>
-            <input type="text" placeholder="username" id="username" />
-            <input type="text" placeholder="password" id="password" />
+        <form onSubmit={onSubmit} onChange={onChange} className="container">
+            <input type="text" className="form-control" placeholder="username" id="username" />
+            <input type="text" className="form-control" placeholder="password" id="password" />
             <input type="submit" value="Login" className="btn btn-primary"/>
         </form>
     )

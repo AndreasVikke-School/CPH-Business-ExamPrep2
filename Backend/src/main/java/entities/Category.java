@@ -1,10 +1,12 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -18,13 +20,16 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    
+    @ManyToMany(mappedBy = "categories")
+    private List<Request> requests;
 
     public Category() {
     }
 
-    public Category(Long id, String name) {
-        this.id = id;
+    public Category(String name, List<Request> requests) {
         this.name = name;
+        this.requests = requests;
     }
 
     public Long getId() {
@@ -41,5 +46,13 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 }
